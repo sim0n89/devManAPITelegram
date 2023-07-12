@@ -15,7 +15,8 @@ def main():
 
    bot = telegram.Bot(token=bot_token)
    chat_id = -1001614010027
-   bot.send_message(chat_id=chat_id, text="hello")
+   # bot.send_message(chat_id=chat_id, text="hello")
+   bot.send_photo(chat_id=chat_id,  photo=open('images/spacex0.jpg', 'rb'))
 
 
 if __name__ == '__main__':
