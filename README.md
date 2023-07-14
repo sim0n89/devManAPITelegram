@@ -62,8 +62,7 @@ python telegram_bot.py
 ```
 python telegram_bot.py -f images/spacex0.jpg
 ```
-Для запуска бесконечного отправления с интервалом `SLEEP_TIME`, укажите параметр `-a` или `--all`:
+Для запуска бесконечного отправления с интервалом `SLEEP_TIME`, задайте значение атрбуту `-f` равное `all`:
 ```
-python telegram_bot.py -a
+python telegram_bot.py -f all
 ```
-Параметры взаимоисключающие, то есть не могут быть указаны все при одном запуске

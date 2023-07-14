@@ -36,12 +36,10 @@ def main():
     parser = argparse.ArgumentParser(
         description="Отправка фото в телеграм"
     )
-    group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument("-f", "--file", help="Путь до фото")
-    group.add_argument("-a", "--all", action="store_true",
-                       help="Публиковать все", default=False)
+    parser.add_argument("-f", "--file", help="Путь к файлу")
+
     args = parser.parse_args()
-    if args.all:
+    if args.file == "all":
         while True:
             images = get_images_from_folder()
             for image in images:
@@ -54,6 +52,7 @@ def main():
             file = random.choice(images)
         else:
             file = args.file
+            
         try:
             with open(file, "rb") as file:
                 bot.send_photo(chat_id=chat_id,  photo=file)
