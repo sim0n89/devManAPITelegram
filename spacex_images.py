@@ -18,12 +18,9 @@ def main():
     parser = argparse.ArgumentParser(
         description='Введите id запуска чтобы получить его фото'
     )
-    parser.add_argument('-id', '--id', help='идентификатор запуска')
+    parser.add_argument('-id', '--id', help='идентификатор запуска', default='latest')
     args = parser.parse_args()
-    if not args.id:
-        spasex_url = 'https://api.spacexdata.com/v5/launches/latest'
-    else:
-        spasex_url = f'https://api.spacexdata.com/v5/launches/{args.id}'
+    spasex_url = f'https://api.spacexdata.com/v5/launches/{args.id}'
         
     fetch_spacex_last_launch(spasex_url)
     

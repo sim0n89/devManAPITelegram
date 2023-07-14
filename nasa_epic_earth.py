@@ -26,12 +26,9 @@ def main():
     parser = argparse.ArgumentParser(
         description='Введите максимальное количество фото для сохранения'
     )
-    parser.add_argument('-q', '--quantity', help='Количество фото')
+    parser.add_argument('-q', '--quantity', help='Количество фото', default=10)
     args = parser.parse_args()
-    if not args.q:
-        quantity = 10
-    else:
-        quantity = args.q
+    quantity = args.q
     get_data_nasa_epic(nasa_api_key, quantity)
 
 

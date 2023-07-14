@@ -43,14 +43,14 @@ def main():
     )
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument('-f', '--file', help='Путь до фото')
-    group.add_argument('-a', '--all', action="store_true",
-                       help='Публиковать все', default=False)
+    group.add_argument('-a', '--all', action="store_true", help='Публиковать все', default=False)
     args = parser.parse_args()
     if args.all:
         while True:
             images = get_images_from_folder()
             for image in images:
-                bot.send_photo(chat_id=chat_id,  photo=open(image, 'rb'))
+                with open(image, 'rb') as file:
+                    bot.send_photo(chat_id=chat_id,  photo=file)
                 time.sleep(float(sleep_time))
     else:
         if not args.file:
@@ -59,7 +59,8 @@ def main():
         else:
             file = args.file
         try:
-            bot.send_photo(chat_id=chat_id,  photo=open(file, 'rb'))
+            with open(file, 'rb') as file:
+                bot.send_photo(chat_id=chat_id,  photo=file)
         except FileNotFoundError:
             print("Файл не найден")
         return

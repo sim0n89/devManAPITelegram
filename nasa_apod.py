@@ -30,12 +30,9 @@ def main():
     parser = argparse.ArgumentParser(
         description='Введите максимальное количество фото для сохранения'
     )
-    parser.add_argument('-q', '--quantity', help='Количество фото')
+    parser.add_argument('-q', '--quantity', help='Количество фото', default=10)
     args = parser.parse_args()
-    if not args.q:
-        quantity = 10
-    else:
-        quantity = args.q
+    quantity = args.q
     images_urls = get_nasa_images_urls(nasa_api_key, quantity)
     for i, url in enumerate(images_urls):
         extension = get_image_extension(url)
