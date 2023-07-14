@@ -12,7 +12,7 @@ def get_nasa_images_urls(api_key, quantity):
     response.raise_for_status()
     images = response.json()
     urls = []
-    for image in response_data:
+    for image in images:
         urls.append(image['url'])
     return urls
 
