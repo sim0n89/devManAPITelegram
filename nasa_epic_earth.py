@@ -2,17 +2,16 @@ import os
 from image_helpers import *
 import argparse
 
+
 def get_data_nasa_epic(api_key, quantity=10):
     response = requests.get(
         'https://api.nasa.gov/EPIC/api/natural/images', params={'api_key': api_key, "count": quantity})
     response.raise_for_status()
-    response_data = response.json()
-    for image in response_data:
+    images = response.json()
+    for image in images:
         date = image['date'].split(' ')[0].replace('-', '/')
         image_link = f"https://api.nasa.gov/EPIC/archive/natural/{date}/png/{image['image']}.png"
         save_image(image_link, f"{image['image']}.png", {"api_key": api_key})
-
-
 
 
 def main():
@@ -22,7 +21,7 @@ def main():
         nasa_api_key = ''
         print("Вы не заполнили API ключ НАСА")
         raise SystemExit
-    
+
     parser = argparse.ArgumentParser(
         description='Введите максимальное количество фото для сохранения'
     )

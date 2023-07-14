@@ -10,7 +10,7 @@ def get_nasa_images_urls(api_key, quantity):
     response = requests.get(
         'https://api.nasa.gov/planetary/apod', params={'api_key': api_key, "count": quantity})
     response.raise_for_status()
-    response_data = response.json()
+    images = response.json()
     urls = []
     for image in response_data:
         urls.append(image['url'])

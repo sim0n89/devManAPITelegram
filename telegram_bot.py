@@ -43,7 +43,8 @@ def main():
     )
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument('-f', '--file', help='Путь до фото')
-    group.add_argument('-a', '--all', action="store_true", help='Публиковать все', default=False)
+    group.add_argument('-a', '--all', action="store_true",
+                       help='Публиковать все', default=False)
     args = parser.parse_args()
     if args.all:
         while True:
