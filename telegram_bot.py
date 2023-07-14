@@ -31,13 +31,8 @@ def main():
         print("Вы не заполнили id канала")
         raise SystemExit
 
-    try:
-        sleep_time = os.environ["SLEEP_TIME"]
-    except KeyError:
-        sleep_time = 14400  # 4 часа
-
+    sleep_time = os.getenv("SLEEP_TIME", default=14400)
     bot = telegram.Bot(token=bot_token)
-
     parser = argparse.ArgumentParser(
         description="Отправка фото в телеграм"
     )
