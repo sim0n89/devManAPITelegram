@@ -11,9 +11,8 @@ def get_nasa_images_urls(api_key, quantity):
         "https://api.nasa.gov/planetary/apod", params={"api_key": api_key, "count": quantity})
     response.raise_for_status()
     images = response.json()
-    images = enumerate(images)
-    images = [(get_image_extension(image['url']),
-               save_image(image['url'], f"nasa_apod_{i}.{extension}")) for i, image in images]
+    urls = [image['url'] for image in images]
+    return urls
 
 
 def main():
@@ -31,8 +30,12 @@ def main():
     )
     parser.add_argument("-q", "--quantity", help="Количество фото", default=10)
     args = parser.parse_args()
-    quantity = args.q
-    get_nasa_images_urls(nasa_api_key, quantity)
+    quantity = args.quantity
+    images_urls = get_nasa_images_urls(nasa_api_key, quantity)
+    for i, url in enumerate(images_urls):
+        extension = get_image_extension(url)
+        save_image(url, f"nasa_apod_{i}.{extension}")
+        
 
 
 if __name__ == "__main__":
